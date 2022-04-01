@@ -17,7 +17,7 @@ import { mapActions, mapGetters, mapMutations, mapState } from "vuex";
 export default {
   data() {
     return {
-      input: ""
+      input: "",
     };
   },
   methods: {
@@ -30,39 +30,39 @@ export default {
       await this.timeout(3000);
       this.hideIsLoading();
 
-      this.setStage("2")
+      this.setStage("2");
       this.$router.push({ name: "stage_2" });
     },
     timeout(ms) {
       return new Promise((resolve) => setTimeout(resolve, ms));
     },
-    setFocus(){
-      this.$refs.input.focus()
-    }
+    setFocus() {
+      this.$refs.input.focus();
+    },
   },
   computed: {
     ...mapGetters("stages", ["getFormattedTimer"]),
-    ...mapState("stages", ["stage"])
+    ...mapState("stages", ["stage"]),
   },
   mounted() {
     // const callback = () => {
     //   this.$router.push({name: "stage_2"})
     // };
     // this.startTimer({ durationInSeconds: 10, callback });
-    this.setFocus()
+    this.setFocus();
   },
 };
 </script>
 
 <style>
-.hidden-input{
+.hidden-input {
   width: 1px;
   height: 1px;
   opacity: 0;
   display: inline;
   padding: 0;
   border: 0;
-  position:absolute;
-  z-index: -100
+  position: absolute;
+  z-index: -100;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <router-view></router-view>
   <Spinner v-if="isLoading" />
-  <ModalGeneral v-if="true"/>
+  <ModalGeneral v-if="false"/>
 </template>
 
 <script>
