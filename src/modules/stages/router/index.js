@@ -2,6 +2,7 @@ import Stages_1 from "../views/Stages_1.vue";
 import Stages_2 from "../views/Stages_2.vue";
 import Stages_3 from "../views/Stages_3.vue";
 import Stages_4 from "../views/Stages_4.vue";
+import Stages_5 from "../views/Stages_5.vue";
 
 export default {
     name: "stages",
@@ -28,6 +29,11 @@ export default {
             path: "stage_4",
             name: "stage_4",
             component: Stages_4,
+        },
+        {
+            path: "stage_5",
+            name: "stage_5",
+            component: Stages_5,
         },
     ],
 };

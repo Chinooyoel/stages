@@ -1,68 +1,55 @@
 <template>
-  <div @click="setFocus">
-    <header class="header">
-      <h1>Etapa {{stage.current}} de {{stage.total}}</h1>
-    </header>
-    <main class="main">
-      {{ getFormattedTimer }}
-      <button class="btn btn-primary" @click="next">Continuar</button>
-      <input type="text" v-model="input" ref="input" class="hidden-input"/>
-    </main>
-    <footer class="footer"></footer>
-  </div>
+  <main @click="next">
+    <video muted autoplay loop>
+      <source src="@/assets/videopresentacion.mp4" />
+    </video>
+    <div class="text-welcome">
+      <h1 class="font-lakaut-titulares text-white">
+        TOQUE LA PANTALLA PARA INICIAR
+      </h1>
+    </div>
+  </main>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations, mapState } from "vuex";
+import { mapMutations } from "vuex";
+import axios from "axios";
 export default {
-  data() {
-    return {
-      input: "",
-    };
-  },
   methods: {
-    ...mapMutations("stages", ["showIsLoading", "hideIsLoading", "setStage"]),
-    ...mapActions("stages", ["startTimer", "stopTimer"]),
+    ...mapMutations("stages", ["showIsLoading", "hideIsLoading"]),
     async next() {
-      this.stopTimer();
-      // Consulta a api
       this.showIsLoading();
-      await this.timeout(3000);
+      const response = await axios.get("http://localhost:8000/client/checkHardwareStatus");
       this.hideIsLoading();
-
-      this.setStage("2");
-      this.$router.push({ name: "stage_2" });
-    },
-    timeout(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
-    },
-    setFocus() {
-      this.$refs.input.focus();
-    },
-  },
-  computed: {
-    ...mapGetters("stages", ["getFormattedTimer"]),
-    ...mapState("stages", ["stage"]),
-  },
-  mounted() {
-    // const callback = () => {
-    //   this.$router.push({name: "stage_2"})
-    // };
-    // this.startTimer({ durationInSeconds: 10, callback });
-    this.setFocus();
+      if (response.status === 200) {
+        if (response.data.status === "passed") {
+          this.$router.push({ name: "stage_2" });
+        }
+      }
+    }
   },
 };
 </script>
 
-<style>
-.hidden-input {
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  display: inline;
-  padding: 0;
-  border: 0;
+<style scoped>
+main {
+  height: 100vh;
+}
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.text-welcome {
+  bottom: 5px;
   position: absolute;
-  z-index: -100;
+  text-align: center;
+  width: 100%;
+}
+.text-welcome h1 {
+  padding: 10px;
+  background: rgb(86, 39, 245, 0.9);
+  border-radius: 10px;
+  display: inline-block;
 }
 </style>

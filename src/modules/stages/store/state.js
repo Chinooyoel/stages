@@ -1,6 +1,12 @@
 export default () => ({
-    client: null,
-    number_guide: null,
+    operation: {
+        numberGuide: null,
+        clientName: null,
+        clientCuit: null,
+        ticketNumber: null,
+        terminal: null,
+        numberOfDispatches: null
+    },    
     modal: {
         icon: null,
         title: null,
