@@ -4,6 +4,9 @@ import Stages_3 from "../views/Stages_3.vue";
 import Stages_4 from "../views/Stages_4.vue";
 import Stages_5 from "../views/Stages_5.vue";
 
+import store from "../../../store/index"
+import router from "@/router";
+
 export default {
     name: "stages",
     redirect: { name: "stage_1" },
@@ -19,21 +22,38 @@ export default {
             path: "stage_2",
             name: "stage_2",
             component: Stages_2,
+            beforeEnter: redirectIfRefreshThePage
         },
         {
             path: "stage_3",
             name: "stage_3",
             component: Stages_3,
+            beforeEnter: redirectIfRefreshThePage
         },
         {
             path: "stage_4",
             name: "stage_4",
             component: Stages_4,
+            beforeEnter: redirectIfRefreshThePage
         },
         {
             path: "stage_5",
             name: "stage_5",
             component: Stages_5,
+            beforeEnter: redirectIfRefreshThePage
         },
     ],
 };
+
+function redirectIfRefreshThePage(to,from){
+      if(to.name === "stage_1"){
+        return true
+      }else{
+          if(store.state.stages.operation.start == false){
+            // Redirect if you refresh the page
+            return {name: "stage_1"}
+          }else{
+            return true
+          }
+      }
+  }

@@ -22,23 +22,54 @@
 
 <script>
 import { mapActions, mapState, mapMutations } from "vuex";
+import axios from "axios";
 export default {
   data() {
     return {
       input: "",
     };
   },
+  mounted() {
+    this.setFocus();
+    const callback = () => {
+      this.$router.push({ name: "stage_1" });
+    };
+    this.startTimer({ durationInSeconds: 120, callback });
+  },
   methods: {
-    ...mapActions("stages", ["startTimer"]),
-    ...mapMutations("stages", ["changeNumberGuide"]),
+    ...mapActions("stages", ["startTimer", "stopTimer"]),
+    ...mapMutations("stages", [
+      "showIsLoading",
+      "hideIsLoading",
+      "changeOperation",
+    ]),
     setFocus() {
       this.$refs.input.focus();
     },
-    next() {
-      this.changeNumberGuide(this.input)
-      this.$router.push({ name: "stage_3" });
+    async next() {
+      this.stopTimer();
+      this.showIsLoading();
+      var formData = new FormData();
+      formData.append("guide", this.input);
+      const response = await axios.post(
+        "http://localhost:8000/client/lakautValidateGuide/",
+        formData
+      );
+      this.hideIsLoading();
+      if (response.status === 200) {
+        if (response.data.status === "passed") {
+          this.changeOperation({
+            guideNumber: response.data.guide,
+            clientName: response.data.client,
+            clientCuit: response.data.cuit,
+            nodes: response.data.nodes,
+          });
+          this.$router.push({ name: "stage_3" });
+        }
+      }
     },
     back() {
+      this.stopTimer();
       this.$router.push({ name: "stage_1" });
     },
   },
@@ -46,9 +77,6 @@ export default {
     input() {
       this.next();
     },
-  },
-  mounted() {
-    this.setFocus();
   },
   computed: {
     ...mapState("stages", ["stage"]),

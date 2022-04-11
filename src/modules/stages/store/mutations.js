@@ -35,10 +35,6 @@ export const setStage = (state, payload) => {
     state.stage.current = payload;
 };
 
-export const changeNumberGuide = (state,payload) => {
-    state.numberGuide = payload;
-}
-
-export const changeClient = (state, payload) => {
-    state.operation.guideNumber = payload
+export const changeOperation= (state,payload) => {
+    state.operation = {...state.operation, ...payload};
 }

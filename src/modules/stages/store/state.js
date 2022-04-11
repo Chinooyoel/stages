@@ -1,11 +1,13 @@
 export default () => ({
     operation: {
-        numberGuide: null,
+        start: false,
+        guideNumber: null,
         clientName: null,
         clientCuit: null,
         ticketNumber: null,
         terminal: null,
-        numberOfDispatches: null
+        nodes: null,
+        datetime: null,
     },    
     modal: {
         icon: null,
@@ -20,10 +22,5 @@ export default () => ({
         object: null,
         seconds: 0,
         durationInSeconds: 150,
-    },
-    stage: {
-        current: 1,
-        total: 5,
-        interruption: false,
-    },
+    }, 
 });

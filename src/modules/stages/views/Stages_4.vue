@@ -21,14 +21,51 @@
 </template>
 
 <script>
+import axios from "axios";
+import { mapActions, mapMutations, mapState } from "vuex";
 export default {
+  mounter() {
+    const callback = () => {
+      this.$router.push({ name: "stage_1" });
+    };
+    this.startTimer({ durationInSeconds: 240, callback });
+  },
   methods: {
-    next() {
-      this.$router.push({ name: "stage_5" });
+    ...mapMutations("stages", [
+      "showIsLoading",
+      "hideIsLoading",
+      "changeOperation",
+    ]),
+    ...mapActions("stages", ["startTimer", "stopTimer"]),
+    async next() {
+      this.showIsLoading();
+      var formData = new FormData();
+      formData.append("guide", this.operation.guideNumber);
+      formData.append("client", this.operation.clientName);
+      formData.append("cuit", this.operation.clientCuit);
+      formData.append("nodes", this.operation.nodes);
+      const response = await axios.post(
+        "http://localhost:8000/client/lakautConfirmGuide/",
+        formData
+      );
+      this.hideIsLoading();
+      if (response.status === 200) {
+        if (response.data.status === "passed") {
+          this.changeOperation({
+            datetime: response.data.datetime,
+            ticketNumber: response.data.ticket,
+            terminal: response.data.terminal,
+          });
+          this.$router.push({ name: "stage_5" });
+        }
+      }
     },
     back() {
       this.$router.push({ name: "stage_3" });
     },
+  },
+  computed: {
+    ...mapState("stages", ["operation"]),
   },
 };
 </script>

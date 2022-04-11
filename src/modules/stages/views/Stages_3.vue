@@ -5,11 +5,13 @@
   </header>
   <main class="main">
     <div class="timer">
-      <h1 class="font-lakaut-titulares"><i class="bi bi-stopwatch text-warning"></i>  00:11</h1>
+      <h1 class="font-lakaut-titulares">
+        <i class="bi bi-stopwatch text-warning"></i> {{ getFormattedTimer }}
+      </h1>
     </div>
     <div>
       <h1>Código de barras válido</h1>
-      <h2>Hola CANTEROS DAMIAN</h2>
+      <h2>Hola {{ operation.clientName }}</h2>
       <h1 class="font-lakaut-titulares">
         INGRESE LA DOCUMENTACION EN EL BUZÓN
       </h1>
@@ -26,14 +28,28 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapState } from "vuex";
 export default {
+  mounted() {
+    const callback = () => {
+      this.$router.push({ name: "stage_4" });
+    };
+    this.startTimer({ durationInSeconds: 30, callback });
+  },
   methods: {
+    ...mapActions("stages", ["startTimer", "stopTimer"]),
     next() {
+      this.stopTimer();
       this.$router.push({ name: "stage_4" });
     },
     back() {
+      this.stopTimer();
       this.$router.push({ name: "stage_1" });
     },
+  },
+  computed: {
+    ...mapState("stages", ["operation"]),
+    ...mapGetters("stages", ["getFormattedTimer"]),
   },
 };
 </script>

@@ -14,19 +14,27 @@
 <script>
 import { mapMutations } from "vuex";
 import axios from "axios";
+
 export default {
   methods: {
-    ...mapMutations("stages", ["showIsLoading", "hideIsLoading"]),
+    ...mapMutations("stages", [
+      "showIsLoading",
+      "hideIsLoading",
+      "changeOperation",
+    ]),
     async next() {
       this.showIsLoading();
-      const response = await axios.get("http://localhost:8000/client/checkHardwareStatus");
+      const response = await axios.get(
+        "http://localhost:8000/client/checkHardwareStatus/"
+      );
       this.hideIsLoading();
+      this.changeOperation({ start: true });
       if (response.status === 200) {
         if (response.data.status === "passed") {
           this.$router.push({ name: "stage_2" });
         }
       }
-    }
+    },
   },
 };
 </script>
