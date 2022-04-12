@@ -31,7 +31,32 @@ body{
   font-family: "sans-serif";
 }
 h1{
-  font-size: 47px
+  font-size: 47px;
+  line-height: 1;
+}
+h2{
+  font-size: 31px;
+}
+.mb-30{
+  margin-bottom: 30px;
+}
+.mb-15{
+  margin-bottom: 15px;
+}
+.mb-11{
+  margin-bottom: 11px;
+}
+.mb-20{
+  margin-bottom: 20px
+}
+.fs-21{
+  font-size: 21px;
+}
+.fs-16{
+  font-size: 16px;
+}
+.fs-20{
+  font-size: 20px;
 }
 .header,
 .footer {
@@ -57,8 +82,8 @@ h1{
   position: absolute;
   top: 0;
   left: 0;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background: rgb(0, 0, 0, 0.8);
   z-index: 100;
 }
@@ -93,5 +118,31 @@ h1{
 }
 .text-success {
   color: #5cb85c;
+}
+.text-red{
+  color: #d9534f
+}
+.text-green{
+  color: #5cb85c
+}
+.text-light-blue{
+  color: #0092FF
+}
+.animate-move-up-down {
+  animation: MoveUpDown 1s linear infinite;
+  position: relative;
+  left: 0;
+  bottom: 0;
+}
+@keyframes MoveUpDown {
+  0%, 100% {
+    bottom: 0;
+  }
+  50% {
+    bottom: 30px;
+  }
+}
+.icon-big{
+  font-size: 4rem;
 }
 </style>

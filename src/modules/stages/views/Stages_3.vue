@@ -6,23 +6,26 @@
   <main class="main">
     <div class="timer">
       <h1 class="font-lakaut-titulares">
-        <i class="bi bi-stopwatch text-warning"></i> {{ getFormattedTimer }}
+        <i class="fa fa-clock text-warning pe-2"></i>{{ getFormattedTimer }}
       </h1>
     </div>
     <div>
-      <h1>Código de barras válido</h1>
-      <h2>Hola {{ operation.clientName }}</h2>
-      <h1 class="font-lakaut-titulares">
+      <h1 class="mb-30">Código de barras válido</h1>
+      <h2 class="mb-30">Hola {{ operation.clientName }}</h2>
+      <h2 class="font-lakaut-titulares mb-30">
         INGRESE LA DOCUMENTACION EN EL BUZÓN
-      </h1>
+      </h2>
+      <div class="animate-move-up-down icon-big text-light-blue">
+        <i class="fa fa-angle-double-down"></i>
+      </div>
     </div>
   </main>
   <footer class="footer">
     <button class="btn-stage btn-stage-left" @click="back">
-      <i class="bi bi-x-circle-fill text-danger pe-2"></i>CANCELAR
+      <i class="fa-solid fa-circle-xmark text-red pe-2"></i>CANCELAR
     </button>
     <button class="btn-stage btn-stage-right" @click="next">
-      <i class="bi bi-arrow-down-circle-fill text-success pe-2"></i>CONTINUAR
+      <i class="fa-solid fa-circle-arrow-down text-green pe-2"></i>CONTINUAR
     </button>
   </footer>
 </template>

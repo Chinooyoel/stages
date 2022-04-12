@@ -7,14 +7,14 @@
     <main class="main">
       <div>
         <input type="text" v-model="input" ref="input" class="hidden-input" />
-        <h1>Bienvenid@ a Lakaut</h1>
-        <h1 class="font-lakaut-titulares">ESCANEE SU CÓDIGO DE BARRAS</h1>
+        <h1 class="mb-30">Bienvenid@ a Lakaut</h1>
+        <h1 class="font-lakaut-titulares mb-30">ESCANEE SU CÓDIGO DE BARRAS</h1>
         <img src="@/assets/barcode-icon.svg" alt="" class="img-barcode" />
       </div>
     </main>
     <footer class="footer">
       <button class="btn-stage btn-stage-left" @click="back">
-        <i class="bi bi-x-circle-fill text-danger pe-2"></i>CANCELAR
+        <i class="fa-solid fa-circle-xmark text-red pe-2"></i>CANCELAR
       </button>
     </footer>
   </div>
@@ -22,7 +22,7 @@
 
 <script>
 import { mapActions, mapState, mapMutations } from "vuex";
-import axios from "axios";
+import { printTicket, validateGuide } from "../services";
 export default {
   data() {
     return {
@@ -49,12 +49,7 @@ export default {
     async next() {
       this.stopTimer();
       this.showIsLoading();
-      var formData = new FormData();
-      formData.append("guide", this.input);
-      const response = await axios.post(
-        "http://localhost:8000/client/lakautValidateGuide/",
-        formData
-      );
+      const response = await validateGuide(this.input);
       this.hideIsLoading();
       if (response.status === 200) {
         if (response.data.status === "passed") {
@@ -65,6 +60,18 @@ export default {
             nodes: response.data.nodes,
           });
           this.$router.push({ name: "stage_3" });
+        } else if (response.data.status === "blocked") {
+          printTicket(
+            this.operation.guideNumber,
+            this.operation.clientName,
+            this.operation.clientCuit,
+            this.operation.nodes,
+            this.operation.datetime,
+            this.operation.ticketNumber,
+            this.operation.terminal,
+            this.operation.info
+          );
+          this.$router.push({ name: "stage_7" });
         }
       }
     },

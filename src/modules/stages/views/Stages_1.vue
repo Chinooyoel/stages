@@ -5,7 +5,7 @@
     </video>
     <div class="text-welcome">
       <h1 class="font-lakaut-titulares text-white">
-        TOQUE LA PANTALLA PARA INICIAR
+        TOQUE PARA INICIAR
       </h1>
     </div>
   </main>
@@ -13,7 +13,7 @@
 
 <script>
 import { mapMutations } from "vuex";
-import axios from "axios";
+import { checkHardwareStatus } from "../services/index"
 
 export default {
   methods: {
@@ -24,9 +24,7 @@ export default {
     ]),
     async next() {
       this.showIsLoading();
-      const response = await axios.get(
-        "http://localhost:8000/client/checkHardwareStatus/"
-      );
+      const response = await checkHardwareStatus()
       this.hideIsLoading();
       this.changeOperation({ start: true });
       if (response.status === 200) {

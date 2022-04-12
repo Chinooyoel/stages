@@ -3,9 +3,10 @@ import Stages_2 from "../views/Stages_2.vue";
 import Stages_3 from "../views/Stages_3.vue";
 import Stages_4 from "../views/Stages_4.vue";
 import Stages_5 from "../views/Stages_5.vue";
+import Stages_6 from "../views/Stages_6.vue";
+import Stages_7 from "../views/Stages_7.vue";
 
 import store from "../../../store/index"
-import router from "@/router";
 
 export default {
     name: "stages",
@@ -42,10 +43,22 @@ export default {
             component: Stages_5,
             beforeEnter: redirectIfRefreshThePage
         },
+        {
+            path: "stage_6",
+            name: "stage_6",
+            component: Stages_6,
+            beforeEnter: redirectIfRefreshThePage
+        },
+        {
+            path: "stage_7",
+            name: "stage_7",
+            component: Stages_7,
+            beforeEnter: redirectIfRefreshThePage
+        },
     ],
 };
 
-function redirectIfRefreshThePage(to,from){
+function redirectIfRefreshThePage(to){
       if(to.name === "stage_1"){
         return true
       }else{

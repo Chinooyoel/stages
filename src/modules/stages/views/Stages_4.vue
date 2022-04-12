@@ -10,19 +10,19 @@
   </main>
   <footer class="footer">
     <button class="btn-stage btn-stage-left" @click="back">
-      <i class="bi bi-x-circle-fill text-danger pe-2"></i>
+      <i class="fa-solid fa-circle-xmark text-red pe-2"></i>
       NO, NECESITO MÁS TIEMPO
     </button>
     <button class="btn-stage btn-stage-right" @click="next">
-      <i class="bi bi-check-circle-fill text-success pe-2"></i>
+      <i class="fa-solid fa-circle-check text-green pe-2"></i>
       SI, CERRAR BUZÓN
     </button>
   </footer>
 </template>
 
 <script>
-import axios from "axios";
 import { mapActions, mapMutations, mapState } from "vuex";
+import { confirmGuide, printTicket } from "../services";
 export default {
   mounter() {
     const callback = () => {
@@ -39,14 +39,11 @@ export default {
     ...mapActions("stages", ["startTimer", "stopTimer"]),
     async next() {
       this.showIsLoading();
-      var formData = new FormData();
-      formData.append("guide", this.operation.guideNumber);
-      formData.append("client", this.operation.clientName);
-      formData.append("cuit", this.operation.clientCuit);
-      formData.append("nodes", this.operation.nodes);
-      const response = await axios.post(
-        "http://localhost:8000/client/lakautConfirmGuide/",
-        formData
+      const response = await confirmGuide(
+        this.operation.guideNumber,
+        this.operation.clientName,
+        this.operation.clientCuit,
+        this.operation.nodes
       );
       this.hideIsLoading();
       if (response.status === 200) {
@@ -55,7 +52,18 @@ export default {
             datetime: response.data.datetime,
             ticketNumber: response.data.ticket,
             terminal: response.data.terminal,
+            info: response.data.info,
           });
+          printTicket(
+            this.operation.guideNumber,
+            this.operation.clientName,
+            this.operation.clientCuit,
+            this.operation.nodes,
+            this.operation.datetime,
+            this.operation.ticketNumber,
+            this.operation.terminal,
+            this.operation.info
+          );
           this.$router.push({ name: "stage_5" });
         }
       }
