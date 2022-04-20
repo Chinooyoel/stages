@@ -5,7 +5,7 @@
   </header>
   <main class="main">
     <div>
-      <h1 class="mb-15">
+      <h1 class="mb-15 fs-40">
         <i class="fa fa-check-circle fa-lg text-green pe-2"></i>Operación
         finalizada con éxito
       </h1>
@@ -67,7 +67,7 @@ export default {
 };
 </script>
 <style scoped>
-h1 {
+.fs-40 {
   font-size: 40px;
 }
 </style>

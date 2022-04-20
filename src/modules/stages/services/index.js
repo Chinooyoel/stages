@@ -1,35 +1,36 @@
-import axios from "axios"
+import axios from "axios";
 
 export const checkHardwareStatus = async () => {
     try {
-        const response = await axios.get(
-            "http://localhost:8000/client/checkHardwareStatus/"
-        );
-        return response
+        const response = await axios.get("/client/checkHardwareStatus/");
+        return response;
     } catch (error) {
-        console.log(error)
-        return error
+        console.log(error);
+        return error;
     }
-}
-
+};
 
 export const validateGuide = async (guideNumber) => {
     try {
         var formData = new FormData();
         formData.append("guide", guideNumber);
         const response = await axios.post(
-            "http://localhost:8000/client/lakautValidateGuide/",
+            "/client/lakautValidateGuide/",
             formData
         );
-        return response
+        return response;
     } catch (error) {
-        console.log(error)
-        return error
+        console.log(error);
+        return error;
     }
-}
+};
 
-
-export const confirmGuide = async (guideNumber, clientName, clientCuit, nodes) => {
+export const confirmGuide = async (
+    guideNumber,
+    clientName,
+    clientCuit,
+    nodes
+) => {
     try {
         var formData = new FormData();
         formData.append("guide", guideNumber);
@@ -37,18 +38,25 @@ export const confirmGuide = async (guideNumber, clientName, clientCuit, nodes) =
         formData.append("cuit", clientCuit);
         formData.append("nodes", nodes);
         const response = await axios.post(
-            "http://localhost:8000/client/lakautConfirmGuide/",
+            "/client/lakautConfirmGuide/",
             formData
         );
-        return response
+        return response;
     } catch (error) {
-        console.log(error)
-        return error
+        console.log(error);
+        return error;
     }
-}
+};
 
-
-export const printTicket = async (guideNumber, clientName, clientCuit, nodes, ticketNumber, terminal, info) => {
+export const printTicket = async (
+    guideNumber,
+    clientName,
+    clientCuit,
+    nodes,
+    ticketNumber,
+    terminal,
+    info
+) => {
     try {
         var formData = new FormData();
         formData.append("guide", guideNumber);
@@ -59,26 +67,20 @@ export const printTicket = async (guideNumber, clientName, clientCuit, nodes, ti
         formData.append("ticket", ticketNumber);
         formData.append("terminal", terminal);
         formData.append("info", info);
-        const response = await axios.post(
-            "http://localhost:8000/client/print_ticket/",
-            formData
-        );
-        return response
+        const response = await axios.post("/client/print_ticket/", formData);
+        return response;
     } catch (error) {
-        console.log(error)
-        return error
+        console.log(error);
+        return error;
     }
-}
-
+};
 
 export const closeMailbox = async () => {
     try {
-        const response = await axios.get(
-            "http://localhost:8000/client/closeMailbox/"
-        );
-        return response
+        const response = await axios.get("/client/closeMailbox/");
+        return response;
     } catch (error) {
-        console.log(error)
-        return error
+        console.log(error);
+        return error;
     }
-}
+};
