@@ -4,8 +4,8 @@
   </header>
   <main class="main">
     <div>
-      <h1 class="mb-20">
-        <i class="fa-solid fa-circle-xmark text-red pe-2"></i>TERMINAL INHABILITADO
+      <h1 class="mb-20 font-lakaut-titulares">
+        <i class="fa-solid fa-circle-xmark text-red pe-2"></i>TERMINAL INHABILITADA
       </h1>
       <h2 class="mb-30" v-for="item in operation.info" :key="item.message">{{item.msg}}</h2>
     </div>
