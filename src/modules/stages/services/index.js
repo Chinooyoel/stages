@@ -7,7 +7,8 @@ export const checkHardwareStatus = async () => {
         );
         return response
     } catch (error) {
-        return error.response
+        console.log(error)
+        return error
     }
 }
 
@@ -22,7 +23,8 @@ export const validateGuide = async (guideNumber) => {
         );
         return response
     } catch (error) {
-        return error.response
+        console.log(error)
+        return error
     }
 }
 
@@ -40,7 +42,8 @@ export const confirmGuide = async (guideNumber, clientName, clientCuit, nodes) =
         );
         return response
     } catch (error) {
-        return error.response
+        console.log(error)
+        return error
     }
 }
 
@@ -62,6 +65,20 @@ export const printTicket = async (guideNumber, clientName, clientCuit, nodes, ti
         );
         return response
     } catch (error) {
-        return error.response
+        console.log(error)
+        return error
+    }
+}
+
+
+export const closeMailbox = async () => {
+    try {
+        const response = await axios.get(
+            "http://localhost:8000/client/closeMailbox/"
+        );
+        return response
+    } catch (error) {
+        console.log(error)
+        return error
     }
 }

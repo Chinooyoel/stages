@@ -24,7 +24,7 @@ export default {
     const callback = () => {
       this.$router.push({ name: "stage_1" });
     };
-    this.startTimer({ durationInSeconds: 30, callback });
+    this.startTimer({ durationInSeconds: 20, callback });
   },
   methods: {
     ...mapActions("stages", ["startTimer", "stopTimer"]),

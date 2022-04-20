@@ -8,6 +8,7 @@ export default () => ({
         terminal: null,
         nodes: null,
         datetime: null,
+        info: null
     },    
     modal: {
         icon: null,

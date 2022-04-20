@@ -134,6 +134,10 @@ h2{
   left: 0;
   bottom: 0;
 }
+.pos-bottom {
+  align-self: flex-end;
+  position: absolute;
+}
 @keyframes MoveUpDown {
   0%, 100% {
     bottom: 0;

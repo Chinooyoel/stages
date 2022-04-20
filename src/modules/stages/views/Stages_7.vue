@@ -26,8 +26,8 @@
   </main>
   <footer class="footer">
     <button class="btn-stage btn-stage-left" @click="back">
-      <i class="fa-solid fa-circle-check text-green pe-2"></i>
-      FINALIZAR
+      <i class="fa-solid fa-circle-xmark text-red pe-2"></i>
+      VOLVER A COMENZAR
     </button>
   </footer>
 </template>
@@ -53,9 +53,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.pos-bottom {
-  align-self: flex-end;
-  position: absolute;
-}
-</style>

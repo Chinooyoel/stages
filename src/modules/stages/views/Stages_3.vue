@@ -31,7 +31,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from "vuex";
+import { mapActions, mapGetters, mapMutations, mapState } from "vuex";
+import { closeMailbox } from '../services';
 export default {
   mounted() {
     const callback = () => {
@@ -41,12 +42,19 @@ export default {
   },
   methods: {
     ...mapActions("stages", ["startTimer", "stopTimer"]),
+    ...mapMutations("stages", [
+      "showIsLoading",
+      "hideIsLoading"
+    ]),
     next() {
       this.stopTimer();
       this.$router.push({ name: "stage_4" });
     },
-    back() {
+    async back() {
       this.stopTimer();
+      this.showIsLoading()
+      await closeMailbox()
+      this.hideIsLoading()
       this.$router.push({ name: "stage_1" });
     },
   },

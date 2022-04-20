@@ -51,7 +51,7 @@ export default {
       this.showIsLoading();
       const response = await validateGuide(this.input);
       this.hideIsLoading();
-      if (response.status === 200) {
+      if (response.status && response.status === 200) {
         if (response.data.status === "passed") {
           this.changeOperation({
             guideNumber: response.data.guide,
@@ -61,6 +61,12 @@ export default {
           });
           this.$router.push({ name: "stage_3" });
         } else if (response.data.status === "blocked") {
+          this.changeOperation({
+            guideNumber: response.data.guide,
+            info: response.data.info,
+            ticketNumber: response.data.ticket,
+            datetime: response.data.datetime,
+          });
           printTicket(
             this.operation.guideNumber,
             this.operation.clientName,
@@ -72,7 +78,15 @@ export default {
             this.operation.info
           );
           this.$router.push({ name: "stage_7" });
+        }else if (response.data.status === "blocked_without_ticket"){
+          this.changeOperation({
+            guideNumber: response.data.guide,
+            info: response.data.info,
+          });
+          this.$router.push({ name: "stage_8" });
         }
+      }else{
+          this.$router.push({ name: "stage_6" });
       }
     },
     back() {

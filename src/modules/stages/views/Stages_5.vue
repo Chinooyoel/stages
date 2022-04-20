@@ -66,10 +66,6 @@ export default {
 };
 </script>
 <style scoped>
-.pos-bottom {
-  align-self: flex-end;
-  position: absolute;
-}
 h1 {
   font-size: 40px;
 }

@@ -5,6 +5,7 @@ import Stages_4 from "../views/Stages_4.vue";
 import Stages_5 from "../views/Stages_5.vue";
 import Stages_6 from "../views/Stages_6.vue";
 import Stages_7 from "../views/Stages_7.vue";
+import Stages_8 from "../views/Stages_8.vue";
 
 import store from "../../../store/index"
 
@@ -53,6 +54,12 @@ export default {
             path: "stage_7",
             name: "stage_7",
             component: Stages_7,
+            beforeEnter: redirectIfRefreshThePage
+        },
+        {
+            path: "stage_8",
+            name: "stage_8",
+            component: Stages_8,
             beforeEnter: redirectIfRefreshThePage
         },
     ],

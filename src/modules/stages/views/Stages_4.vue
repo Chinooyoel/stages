@@ -22,10 +22,13 @@
 
 <script>
 import { mapActions, mapMutations, mapState } from "vuex";
-import { confirmGuide, printTicket } from "../services";
+import { closeMailbox, confirmGuide, printTicket } from "../services";
 export default {
   mounter() {
-    const callback = () => {
+    const callback = async () => {
+      this.showIsLoading()
+      await closeMailbox()
+      this.hideIsLoading()
       this.$router.push({ name: "stage_1" });
     };
     this.startTimer({ durationInSeconds: 240, callback });
@@ -46,7 +49,7 @@ export default {
         this.operation.nodes
       );
       this.hideIsLoading();
-      if (response.status === 200) {
+      if (response.status && response.status === 200) {
         if (response.data.status === "passed") {
           this.changeOperation({
             datetime: response.data.datetime,
@@ -66,6 +69,8 @@ export default {
           );
           this.$router.push({ name: "stage_5" });
         }
+      }else{
+          this.$router.push({ name: "stage_6" });
       }
     },
     back() {

@@ -16,6 +16,20 @@ import { mapMutations } from "vuex";
 import { checkHardwareStatus } from "../services/index"
 
 export default {
+  mounted(){
+    // restart operation
+    this.changeOperation({         
+      start: false,
+        guideNumber: null,
+        clientName: null,
+        clientCuit: null,
+        ticketNumber: null,
+        terminal: null,
+        nodes: null,
+        datetime: null,
+        info: null
+    });
+  },
   methods: {
     ...mapMutations("stages", [
       "showIsLoading",
@@ -27,10 +41,12 @@ export default {
       const response = await checkHardwareStatus()
       this.hideIsLoading();
       this.changeOperation({ start: true });
-      if (response.status === 200) {
+      if (response.status && response.status === 200) {
         if (response.data.status === "passed") {
           this.$router.push({ name: "stage_2" });
         }
+      }else{
+          this.$router.push({ name: "stage_6" });
       }
     },
   },
