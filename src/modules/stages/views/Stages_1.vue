@@ -20,14 +20,14 @@ export default {
     // restart operation
     this.changeOperation({         
       start: false,
-        guideNumber: null,
-        clientName: null,
-        clientCuit: null,
-        ticketNumber: null,
-        terminal: null,
-        nodes: null,
-        datetime: null,
-        info: null
+      guideNumber: null,
+      clientName: null,
+      clientCuit: null,
+      ticketNumber: null,
+      terminal: null,
+      nodes: null,
+      datetime: null,
+      info: null
     });
   },
   methods: {
@@ -44,6 +44,9 @@ export default {
       if (response.status && response.status === 200) {
         if (response.data.status === "passed") {
           this.$router.push({ name: "stage_2" });
+        }else if (response.data.status === "blocked"){
+          this.changeOperation({ info: response.data.info });
+          this.$router.push({ name: "stage_9" });
         }
       }else{
           this.$router.push({ name: "stage_6" });

@@ -77,6 +77,9 @@ export default {
             this.operation.terminal,
             this.operation.info
           );
+          if("La guía tiene un estado no permitido. Sólo se adminten guias CONFIRMADAS" === response.data.info){
+            this.changeOperation({info: "La guía tiene un estado no permitido. Sólo se admiten guías CONFIRMADAS"})  
+          }
           this.$router.push({ name: "stage_7" });
         }else if (response.data.status === "blocked_without_ticket"){
           this.changeOperation({
@@ -100,7 +103,7 @@ export default {
     },
   },
   computed: {
-    ...mapState("stages", ["stage"]),
+    ...mapState("stages", ["operation"]),
   },
 };
 </script>

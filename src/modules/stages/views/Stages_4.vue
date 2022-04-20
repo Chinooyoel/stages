@@ -24,7 +24,7 @@
 import { mapActions, mapMutations, mapState } from "vuex";
 import { closeMailbox, confirmGuide, printTicket } from "../services";
 export default {
-  mounter() {
+  mounted() {
     const callback = async () => {
       this.showIsLoading()
       await closeMailbox()

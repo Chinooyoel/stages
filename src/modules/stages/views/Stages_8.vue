@@ -7,7 +7,7 @@
       <h1 class="mb-20">
         <i class="fa-solid fa-circle-xmark text-red pe-2"></i>Operación fallida
       </h1>
-      <h2 class="mb-70">{{operation.info}}</h2>
+      <h2 class="mb-30">{{operation.info}}</h2>
       <h3 class="mb-30 font-lakaut-titulares message" style="font-size: 26px;">Atención al cliente</h3>
       <hr class="hr mb-30" style="height:1px;border-width:0;color:gray;background-color:gray; width: 35%;display:inline-block">
       <h3 class="mb-30 number fs-21">0800-122-PSAD (7723) | 0810-122-7723 Desde el interior del país</h3>
@@ -31,7 +31,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 export default {
-  mounter() {
+  mounted() {
     const callback = () => {
       this.$router.push({ name: "stage_1" });
     };

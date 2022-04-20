@@ -20,7 +20,7 @@
 <script>
 import { mapActions } from 'vuex';
 export default {
-  mounter() {
+  mounted() {
     const callback = () => {
       this.$router.push({ name: "stage_1" });
     };

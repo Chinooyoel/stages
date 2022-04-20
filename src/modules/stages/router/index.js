@@ -6,6 +6,7 @@ import Stages_5 from "../views/Stages_5.vue";
 import Stages_6 from "../views/Stages_6.vue";
 import Stages_7 from "../views/Stages_7.vue";
 import Stages_8 from "../views/Stages_8.vue";
+import Stages_9 from "../views/Stages_9.vue";
 
 import store from "../../../store/index"
 
@@ -62,18 +63,25 @@ export default {
             component: Stages_8,
             beforeEnter: redirectIfRefreshThePage
         },
+        {
+            path: "stage_9",
+            name: "stage_9",
+            component: Stages_9,
+            beforeEnter: redirectIfRefreshThePage
+        },
     ],
 };
 
 function redirectIfRefreshThePage(to){
-      if(to.name === "stage_1"){
-        return true
-      }else{
-          if(store.state.stages.operation.start == false){
-            // Redirect if you refresh the page
-            return {name: "stage_1"}
-          }else{
-            return true
-          }
-      }
+    return true
+    //   if(to.name === "stage_1"){
+    //     return true
+    //   }else{
+    //       if(store.state.stages.operation.start == false){
+    //         // Redirect if you refresh the page
+    //         return {name: "stage_1"}
+    //       }else{
+    //         return true
+    //       }
+    //   }
   }

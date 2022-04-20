@@ -7,6 +7,7 @@
       <h1 class="mb-20">
         <i class="fa-solid fa-circle-xmark text-red pe-2"></i>Operación fallida
       </h1>
+      <h3 class="mb-20">{{operation.info}}</h3>
       <h3 class="mb-20 fs-21">Número de guía: {{ operation.guideNumber }}</h3>
       <h3 class="mb-20 fs-21">Emitido: {{ operation.datetime }}</h3>
       <h3 class="mb-20 fs-21">
@@ -35,7 +36,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 export default {
-  mounter() {
+  mounted() {
     const callback = () => {
       this.$router.push({ name: "stage_1" });
     };

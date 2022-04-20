@@ -9,6 +9,7 @@
         <i class="fa fa-check-circle fa-lg text-green pe-2"></i>Operación
         finalizada con éxito
       </h1>
+      <h3 class="mb-15">La operación de ingreso fue exitosa, {{ operation.clientName }}.</h3>
       <h3 class="mb-15"></h3>
       <h3 class="mb-15">Guía: {{ operation.guideNumber }}</h3>
       <h3 class="mb-11 fs-21">CUIT: {{ operation.clientCuit }}</h3>
@@ -47,7 +48,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 export default {
-  mounter() {
+  mounted() {
     const callback = () => {
       this.$router.push({ name: "stage_1" });
     };
