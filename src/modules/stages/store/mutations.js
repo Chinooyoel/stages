@@ -34,3 +34,7 @@ export const decrementStage = (state) => {
 export const setStage = (state, payload) => {
     state.stage.current = payload;
 };
+
+export const changeOperation= (state,payload) => {
+    state.operation = {...state.operation, ...payload};
+}

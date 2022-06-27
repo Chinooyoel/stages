@@ -21,7 +21,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("stages", ["showIsLoading", "hideIsLoading", "setStage"]),
+    ...mapMutations("stages", ["showIsLoading", "hideIsLoading", "setStage", "changeOperation"]),
     ...mapActions("stages", ["startTimer", "stopTimer"]),
     async next() {
       this.stopTimer();
@@ -29,6 +29,7 @@ export default {
       this.showIsLoading();
       await this.timeout(3000);
       this.hideIsLoading();
+      this.changeOperation({ start: true });
 
       this.setStage("2");
       this.$router.push({ name: "stage_2" });
@@ -45,10 +46,10 @@ export default {
     ...mapState("stages", ["stage"]),
   },
   mounted() {
-    // const callback = () => {
-    //   this.$router.push({name: "stage_2"})
-    // };
-    // this.startTimer({ durationInSeconds: 10, callback });
+    const callback = () => {
+      this.$router.push({name: "stage_2"})
+    };
+    this.startTimer({ durationInSeconds: 10, callback });
     this.setFocus();
   },
 };
