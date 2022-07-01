@@ -1,17 +1,12 @@
 export default () => ({
     operation: {
         start: false,
-        guideNumber: null,
         clientName: null,
         clientCuit: null,
         ticketNumber: null,
-        terminal: null,
-        nodes: null,
         datetime: null,
         info: null
     },   
-    client: null,
-    number_guide: null,
     modal: {
         icon: null,
         title: null,

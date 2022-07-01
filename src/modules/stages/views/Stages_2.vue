@@ -13,10 +13,8 @@ export default {
     ...mapActions("stages", ["startTimer"]),
   },
   mounted(){
-    const callback = () => {
-      this.$router.push({name: "stage_1"})
-    }
-    this.startTimer({durationInSeconds: 10, callback})
+
+
   },
   computed: {
     ...mapState("stages", ["stage"])
